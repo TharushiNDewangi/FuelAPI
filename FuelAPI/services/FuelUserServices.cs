@@ -26,6 +26,7 @@ namespace FuelAPI.services
                 options.Value.FuelUserCollectionName);
         }
 
+
         public async Task<List<FuelUser>> Get() =>
             await _fueluser.Find(_ => true).ToListAsync();
 

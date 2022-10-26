@@ -4,6 +4,7 @@ using FuelAPI.services;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<FuelDatabaseSettings>(builder.Configuration.GetSection("FuelDatabaseSettings"));
 builder.Services.AddSingleton<FuelUserServices>();
+builder.Services.AddSingleton<VehicleOwnerServices>();
 var app = builder.Build();
 
 app.MapGet("/", () => "Movies API!");
@@ -12,6 +13,7 @@ app.MapGet("/", () => "Movies API!");
 /// Get all movies
 /// </summary>
 app.MapGet("/api/fuelusers", async (FuelUserServices fueluserService) => await fueluserService.Get());
+app.MapGet("/api/vehicleowners", async (VehicleOwnerServices vehicleOwnerService) => await vehicleOwnerService.Get());
 
 /// <summary>
 /// Get a movie by id
@@ -28,6 +30,12 @@ app.MapGet("/api/fuelusers/{id}", async (FuelUserServices fueluserService, strin
 app.MapPost("/api/fuelusers", async (FuelUserServices fueluserService, FuelUser fueluser) =>
 {
     await fueluserService.Create(fueluser);
+    return Results.Ok();
+});
+
+app.MapPost("/api/vehicleowner", async (VehicleOwnerServices vehicleOwnerService, VehicleOwner vehicleOwner) =>
+{
+    await vehicleOwnerService.Create(vehicleOwner);
     return Results.Ok();
 });
 

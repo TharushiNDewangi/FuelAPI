@@ -4,21 +4,20 @@ using MongoDB.Bson;
 namespace FuelAPI.models
 {
     [BsonIgnoreExtraElements]
-    public class FuelUser
+    public class VehicleOwner
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = String.Empty;
-        [BsonElement("location")]
-        public string Location { get; set; } = string.Empty;
+        [BsonElement("neareststation")]
+        public string Neareststation { get; set; } = string.Empty;
         [BsonElement("type")]
         public string Type { get; set; } = string.Empty;
 
-        [BsonElement("start")]
-        public string Start { get; set; }
+        [BsonElement("arrivaltime")]
+        public string Arrivaltime { get; set; }
 
-        [BsonElement("end")]
-        public string End { get; set; }
-
+        [BsonElement("departtime")]
+        public string Departtime { get; set; }
     }
 }

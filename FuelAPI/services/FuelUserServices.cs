@@ -32,6 +32,8 @@ namespace FuelAPI.services
 
         public async Task<FuelUser> Get(string id) =>
             await _fueluser.Find(m => m.Id == id).FirstOrDefaultAsync();
+        public async Task<FuelUser> Getbylocation(string nerestlocation) =>
+            await _fueluser.Find(m => m.Location == nerestlocation).FirstOrDefaultAsync();
 
         public async Task Create(FuelUser newfueluser) =>
             await _fueluser.InsertOneAsync(newfueluser);

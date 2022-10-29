@@ -15,34 +15,55 @@ app.MapGet("/api/stationowners", async (FuelUserServices fueluserService) => awa
 app.MapGet("/api/vehicleowners", async (VehicleOwnerServices vehicleOwnerService) => await vehicleOwnerService.Get());
 
 
+
 /// Get by id
-app.MapGet("/api/fuelusers/{id}", async (FuelUserServices fueluserService, string id) =>
+app.MapGet("/api/stationowner/{id}", async (FuelUserServices fueluserService, string id) =>
 {
     var fueluser = await fueluserService.Get(id);
     return fueluser is null ? Results.NotFound() : Results.Ok(fueluser);
 });
+app.MapGet("/api/vehicleowner/{id}", async (VehicleOwnerServices vehicleOwnerService, string id) =>
+{
+    var fueluser = await vehicleOwnerService.Get(id);
+    return fueluser is null ? Results.NotFound() : Results.Ok(fueluser);
+});
 
+app.MapGet("/api/bynerestloc/{nerestlocation}", async (FuelUserServices fueluserService, string nerestlocation) =>
+{
+    var fueluser = await fueluserService.Getbylocation(nerestlocation);
+    return fueluser is null ? Results.NotFound() : Results.Ok(fueluser);
+});
 
-app.MapPost("/api/vehicleowners", async (FuelUserServices fueluserService, FuelUser fueluser) =>
+app.MapPost("/api/stationowners", async (FuelUserServices fueluserService, FuelUser fueluser) =>
 {
     await fueluserService.Create(fueluser);
     return Results.Ok();
 });
 
-app.MapPost("/api/stationowner", async (VehicleOwnerServices vehicleOwnerService, VehicleOwner vehicleOwner) =>
+app.MapPost("/api/vehicleowners", async (VehicleOwnerServices vehicleOwnerService, VehicleOwner vehicleOwner) =>
 {
     await vehicleOwnerService.Create(vehicleOwner);
     return Results.Ok();
 });
 
 
-app.MapPut("/api/fuelusers/{id}", async (FuelUserServices fueluserService, string id, FuelUser updatedfueluser) =>
+app.MapPut("/api/upstationowner/{id}", async (FuelUserServices fueluserService, string id, FuelUser updatedfueluser) =>
 {
     var fueluser = await fueluserService.Get(id);
     if (fueluser is null) return Results.NotFound();
 
     updatedfueluser.Id = fueluser.Id;
     await fueluserService.Update(id, updatedfueluser);
+
+    return Results.NoContent();
+});
+app.MapPut("/api/upvehicleowner/{id}", async (VehicleOwnerServices vehicleOwnerService, string id, VehicleOwner updateduser) =>
+{
+    var vehicleOwner = await vehicleOwnerService.Get(id);
+    if (vehicleOwner is null) return Results.NotFound();
+
+    updateduser.Id = vehicleOwner.Id;
+    await vehicleOwnerService.Update(id, updateduser);
 
     return Results.NoContent();
 });

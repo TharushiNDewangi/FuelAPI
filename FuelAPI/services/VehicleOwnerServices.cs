@@ -11,10 +11,6 @@ namespace FuelAPI.services
 
         public VehicleOwnerServices(IOptions<FuelDatabaseSettings> options)
         {
-            //var mongoClient = new MongoClient(options.Value.ConnectionString);
-
-            //_fueluser = mongoClient.GetDatabase(options.Value.DatabaseName)
-            // .GetCollection<FuelUser>(options.Value.FuelUserCollectionName);
 
 
             var mongoClient = new MongoClient(options.Value.ConnectionString);

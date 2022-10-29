@@ -11,7 +11,7 @@ app.MapGet("/", () => "HEY API!");
 
 
 // Get all data
-app.MapGet("/api/stationowner", async (FuelUserServices fueluserService) => await fueluserService.Get());
+app.MapGet("/api/stationowners", async (FuelUserServices fueluserService) => await fueluserService.Get());
 app.MapGet("/api/vehicleowners", async (VehicleOwnerServices vehicleOwnerService) => await vehicleOwnerService.Get());
 
 
